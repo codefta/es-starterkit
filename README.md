@@ -13,7 +13,7 @@ Starter kit ini dibuat dengan objektif sebagai berikut:
 - Menunjukkan bagaimana menggunakan elasticsearch di Go
 - Menunjukkan bagaimana menjalankan aplikasi server dengan menggunakan docker compose
 - Menunjukkan bagaimana menghubungkan antara satu aplikasi dan aplikasi lainnya dengan docker compose, dalam hal ini kita akan menghubungkan aplikasi server & elasticsearch
-- Menunjukkan bagaimana melakukan Go development dengan menggunakan hot reload di docker compose
+<!-- - Menunjukkan bagaimana melakukan Go development dengan menggunakan hot reload di docker compose -->
 
 Wah sangat banyak ya?
 
@@ -35,8 +35,8 @@ Untuk menjalankan project ini cukup ketik perintah berikut di terminal:
 
 Perintah ini akan menjalankan 2 service di komputer teman-teman:
 
-- `ElasticSearch` => Database yang dioptimasi untuk melakukan pencarian dokumen berbasis teks (a.k.a Search Engine). Software ini akan dijalankan pada `http://localhost:9202`.
-- `JajananAPI` => API server untuk mencari, menambahkan, dan menghapus data jajanan (street food) yang ada di Indonesia. Server ini akan dijalankan pada `http://localhost:8101`.
+- `ElasticSearch` => Database yang dioptimasi untuk melakukan pencarian dokumen berbasis teks (a.k.a Search Engine). Aplikasi ini akan dijalankan pada `http://localhost:9202`.
+- `Kuliner API` => API server untuk mencari, menambahkan, mengubah, dan menghapus data tentang kuliner Indonesia. Aplikasi ini akan dijalankan pada `http://localhost:8101`. Untuk sekarang aplikasi ini tidak memiliki web interface, sehingga untuk mengaksesnya gunakan Postman atau cURL sesuai dengan spesifikasi yang tertulis di [kuliner_api.md](docs/kuliner_api.md).
 
 > **Note:**
 >
