@@ -42,7 +42,7 @@ Perintah ini akan menjalankan 2 service di komputer teman-teman:
 >
 > Starter kit ini didesain untuk tidak menyimpan data secara permanen, jadi data-data baru yang dibuat oleh teman-teman akan terhapus ketika teman-teman menghentikan kit ini. Ketika teman-teman menjalankan kembali kit ini, data-data yang ada akan di-_reset_ seperti semula.
 >
-> Reset data ini dilakukan agar setiap kali starter kit ini kembali dijalankan, data-nya selalu dalam keadaan bersih (clean slate). Seringkali data yang tidak bersih bisa menimbulkan banyak masalah ketika kita melakukan development. Karena itulah biasanya kita lebih prefer untuk selalu memulai running project dengan data yang bersih.
+> Reset data ini dilakukan agar setiap kali starter kit ini kembali dijalankan, data-nya selalu dalam keadaan bersih (clean slate). Seringkali data yang tidak bersih bisa menimbulkan banyak masalah ketika kita melakukan development. Karena itulah di starter kit ini untuk selalu memulai dengan data yang bersih.
 
 [Back to Top](#elasticsearch-starter-kit)
 
