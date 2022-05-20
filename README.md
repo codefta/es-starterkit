@@ -6,9 +6,26 @@ Seluruh dokumen yang ada di project ini akan ditulis dalam Bahasa Indonesia. Hal
 
 ## Objektif
 
+Starter kit ini dibuat dengan objektif sebagai berikut:
+
+- Menunjukkan bagaimana menjalankan elasticsearch dengan menggunakan docker compose
+- Menunjukkan bagaimana melakukan inisialisasi dan penambahan data awal pada elasticsearch dengan menggunakan docker compose
+- Menunjukkan bagaimana menggunakan elasticsearch di Go
+- Menunjukkan bagaimana menjalankan aplikasi server dengan menggunakan docker compose
+- Menunjukkan bagaimana menghubungkan antara satu aplikasi dan aplikasi lainnya dengan docker compose, dalam hal ini kita akan menghubungkan aplikasi server & elasticsearch
+- Menunjukkan bagaimana melakukan Go development dengan menggunakan hot reload di docker compose
+
+Wah sangat banyak ya?
+
+Yap, cuma memang setiap objektif ini adalah pengetahuan dasar bagi teman-teman untuk bisa berkontribusi dengan aktif di Ghazlabs. 😃
+
+[Back to Top](#elasticsearch-starter-kit)
+
+---
+
 ## Cara Menjalankan
 
-Project ini dibangun diatas Docker, Docker Compose, Makefiel & Go. Jadi sebelum teman-teman memulai untuk menjalankan project ini, pastikan seluruh teknologi tersebut sudah terinstall dengan baik di komputer teman-teman.
+Project ini dibangun diatas Docker, Docker Compose, Makefile, & Go. Jadi sebelum teman-teman memulai untuk menjalankan project ini, pastikan seluruh teknologi tersebut sudah terinstall dengan baik di komputer teman-teman.
 
 Untuk menjalankan project ini cukup ketik perintah berikut di terminal:
 
