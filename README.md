@@ -35,14 +35,14 @@ Untuk menjalankan project ini cukup ketik perintah berikut di terminal:
 
 Perintah ini akan menjalankan 2 service di komputer teman-teman:
 
-- `ElasticSearch` => Software yang dioptimasi untuk melakukan pencarian dokumen secara umum (a.k.a Search Engine). Software ini akan dijalankan pada `http://localhost:9202`.
-- `JajananAPI` => API server yang memungkinkan kita mencari, menambahkan, dan menghapus data jajanan (street food) yang ada di Indonesia. Server ini akan dijalankan pada `http://localhost:8101`.
+- `ElasticSearch` => Database yang dioptimasi untuk melakukan pencarian dokumen berbasis teks (a.k.a Search Engine). Software ini akan dijalankan pada `http://localhost:9202`.
+- `JajananAPI` => API server untuk mencari, menambahkan, dan menghapus data jajanan (street food) yang ada di Indonesia. Server ini akan dijalankan pada `http://localhost:8101`.
 
 > **Note:**
 >
 > Starter kit ini didesain untuk tidak menyimpan data secara permanen, jadi data-data baru yang dibuat oleh teman-teman akan terhapus ketika teman-teman menghentikan kit ini. Ketika teman-teman menjalankan kembali kit ini, data-data yang ada akan di-_reset_ seperti semula.
 >
-> Reset data ini dilakukan agar setiap kali starter kit ini kembali dijalankan, data-nya selalu dalam keadaan bersih (clean slate). Seringkali data yang tidak bersih bisa menimbulkan banyak masalah ketika kita melakukan development. Karena itulah biasanya untuk development kita selalu memulai dengan data yang bersih.
+> Reset data ini dilakukan agar setiap kali starter kit ini kembali dijalankan, data-nya selalu dalam keadaan bersih (clean slate). Seringkali data yang tidak bersih bisa menimbulkan banyak masalah ketika kita melakukan development. Karena itulah biasanya kita lebih prefer untuk selalu memulai running project dengan data yang bersih.
 
 [Back to Top](#elasticsearch-starter-kit)
 
