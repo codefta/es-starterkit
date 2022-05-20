@@ -13,7 +13,8 @@ PUT /foods
     "properties": {
       "name": {"type": "text"}, // kita membuat field `name` menjadi searchable
       "description": {"type": "text"} // kita membuat field `description` menjadi searchable
-    }
+    },
+    "dynamic": false // kita tidak mengizinkan field lain menjadi searchable
   }
 }
 ```
