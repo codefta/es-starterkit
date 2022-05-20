@@ -2,6 +2,8 @@ package core
 
 import "strings"
 
+const defaultSearchLimit = 10
+
 type Food struct {
 	ID          string
 	Name        string

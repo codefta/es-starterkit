@@ -3,6 +3,8 @@ package core
 import (
 	"context"
 	"fmt"
+
+	"gopkg.in/validator.v2"
 )
 
 type Service interface {
@@ -11,15 +13,27 @@ type Service interface {
 	SearchFoods(ctx context.Context, query string) ([]Food, error)
 }
 
-func NewService(s Storage) (Service, error) {
-	if s == nil {
-		return nil, fmt.Errorf("missing storage")
+type Config struct {
+	Storage     Storage `validate:"nonnil"`
+	SearchLimit int
+}
+
+func NewService(cfg Config) (Service, error) {
+	err := validator.Validate(cfg)
+	if err != nil {
+		return nil, err
 	}
-	return &service{storage: s}, nil
+	searchLimit := cfg.SearchLimit
+	if searchLimit <= 0 {
+		searchLimit = defaultSearchLimit
+	}
+	s := &service{storage: cfg.Storage, searchLimit: searchLimit}
+	return s, nil
 }
 
 type service struct {
-	storage Storage
+	storage     Storage
+	searchLimit int
 }
 
 func (s *service) IndexFood(ctx context.Context, input FoodInput) (*Food, error) {
@@ -46,8 +60,11 @@ func (s *service) DeleteFood(ctx context.Context, id string) error {
 }
 
 func (s *service) SearchFoods(ctx context.Context, query string) ([]Food, error) {
-	foods, err := s.storage.SearchFood(ctx, query)
+	foods, err := s.storage.SearchFood(ctx, query, s.searchLimit)
 	if err != nil {
+		if err == ErrNotFound {
+			return nil, err
+		}
 		return nil, fmt.Errorf("unable to search foods from storage due: %w", err)
 	}
 	return foods, nil
