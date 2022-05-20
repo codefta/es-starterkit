@@ -17,7 +17,7 @@ Starter kit ini dibuat dengan objektif sebagai berikut:
 
 Wah sangat banyak ya?
 
-Yap, cuma memang setiap objektif ini adalah pengetahuan dasar bagi teman-teman untuk bisa berkontribusi dengan aktif di Ghazlabs. 😃
+Yap, memang cukup banyak, tapi setiap objektif ini adalah memang pengetahuan dasar bagi teman-teman untuk bisa berkontribusi secara aktif di Ghazlabs. Jadi do your best untuk memahaminya ya! 😃
 
 [Back to Top](#elasticsearch-starter-kit)
 
