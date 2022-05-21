@@ -6,7 +6,6 @@ import (
 
 	"github.com/ghazlabs/es-starterkit/internal/kuliner-api/core"
 	"github.com/go-chi/render"
-	"gopkg.in/validator.v2"
 )
 
 type respBody struct {
@@ -49,7 +48,7 @@ type indexFoodReqBody struct {
 }
 
 func (rb *indexFoodReqBody) Bind(r *http.Request) error {
-	return validator.Validate(rb)
+	return nil
 }
 
 type foodResp struct {

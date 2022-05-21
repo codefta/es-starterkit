@@ -73,6 +73,12 @@ func (a *API) serveIndexFood(w http.ResponseWriter, r *http.Request) {
 		Description: rb.Description,
 	})
 	if err != nil {
+		switch err {
+		case core.ErrMissingName:
+			err = newBadRequestError("missing `name`")
+		case core.ErrMissingDescription:
+			err = newBadRequestError("missing `description`")
+		}
 		render.Render(w, r, newErrorResp(err))
 		return
 	}
