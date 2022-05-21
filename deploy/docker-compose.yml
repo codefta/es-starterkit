@@ -1,5 +1,7 @@
 version: "2.4"
 services:
+  # elasticsearch adalah database yang akan kita gunakan untuk menyimpan
+  # data-data mengenai kuliner Indonesia.
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
     healthcheck:
@@ -19,20 +21,30 @@ services:
       - IPC_LOCK
     ports:
       - "9202:9200"
-  elasticsearch_seeder:
-    image: curlimages/curl:7.83.1
+  # es_seeder digunakan untuk menginisialisasi index dan data yang ada di elasticsearch.
+  # Berbeda dengan MySQL image yang sudah menyediakan path khusus untuk menaruh script
+  # untuk inisialisasi, elasticsearch tidak memiliki fitur ini. Karena itulah kita perlu
+  # untuk membuat initializer-nya secara terpisah.
+  es_seeder:
+    build:
+      context: ../
+      dockerfile: ./build/package/seeder/Dockerfile
     depends_on:
       elasticsearch:
         condition: service_healthy
+    environment:
+      - ES_HOST=http://elasticsearch:9200
+      - DATA_PATH=/data.json
     volumes:
-      - ./elasticsearch_init.sh:/elasticsearch_init.sh
-    entrypoint: sh -c "ES_HOST=http://elasticsearch:9200 /elasticsearch_init.sh"
+      - ../cmd/seeder/data.json:/data.json
+  # kuliner-api adalah aplikasi utama kita. Aplikasi ini berisi API untuk melakukan pencarian,
+  # penambahan, dan penghapusan data kuliner Indonesia yang tersimpan di elasticsearch.
   kuliner-api:
     build:
       context: ../
       dockerfile: ./build/package/kuliner-api/Dockerfile
     depends_on:
-      elasticsearch_seeder:
+      es_seeder:
         condition: service_completed_successfully
     environment:
       - ES_HOST=http://elasticsearch:9200
