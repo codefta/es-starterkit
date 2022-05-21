@@ -21,6 +21,10 @@ services:
       - IPC_LOCK
     ports:
       - "9202:9200"
+    # disini kita menonaktifkan logging untuk elasticsearch supaya pemula yang baru saja
+    # mulai belajar tidak overwhelmed dengan log yang kurang relevan dari elasticsearch.
+    logging:
+      driver: none 
   # es_seeder digunakan untuk menginisialisasi index dan data yang ada di elasticsearch.
   # Berbeda dengan MySQL image yang sudah menyediakan path khusus untuk menaruh script
   # untuk inisialisasi, elasticsearch tidak memiliki fitur ini. Karena itulah kita perlu

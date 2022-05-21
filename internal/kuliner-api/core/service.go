@@ -41,11 +41,12 @@ func (s *service) IndexFood(ctx context.Context, input FoodInput) (*Food, error)
 	if err != nil {
 		return nil, err
 	}
-	err = s.storage.IndexFood(ctx, input.ToFood())
+	food := input.ToFood()
+	err = s.storage.IndexFood(ctx, food)
 	if err != nil {
 		return nil, fmt.Errorf("unable to index food into storage due: %w", err)
 	}
-	return nil, nil
+	return &food, nil
 }
 
 func (s *service) DeleteFood(ctx context.Context, id string) error {

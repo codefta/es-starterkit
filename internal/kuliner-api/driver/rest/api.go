@@ -1,6 +1,7 @@
 package rest
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/ghazlabs/es-starterkit/internal/kuliner-api/core"
@@ -83,7 +84,7 @@ func (a *API) serveDeleteFood(w http.ResponseWriter, r *http.Request) {
 	foodID := chi.URLParam(r, "food_id")
 	err := a.svc.DeleteFood(r.Context(), foodID)
 	if err != nil {
-		if err == core.ErrNotFound {
+		if errors.Is(err, core.ErrNotFound) {
 			err = newNotFoundError()
 		}
 		render.Render(w, r, newErrorResp(err))

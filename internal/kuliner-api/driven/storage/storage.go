@@ -63,7 +63,7 @@ func (s *Storage) DeleteFood(ctx context.Context, id string) error {
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusNotFound {
+	if resp.StatusCode == http.StatusNotFound {
 		return core.ErrNotFound
 	}
 	if resp.IsError() {

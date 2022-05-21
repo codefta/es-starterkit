@@ -3,7 +3,6 @@ package rest
 import (
 	"errors"
 	"net/http"
-	"time"
 
 	"github.com/ghazlabs/es-starterkit/internal/kuliner-api/core"
 	"github.com/go-chi/render"
@@ -16,12 +15,10 @@ type respBody struct {
 	Data       interface{} `json:"data,omitempty"`
 	Err        string      `json:"err,omitempty"`
 	Message    string      `json:"msg,omitempty"`
-	Timestamp  int64       `json:"ts"`
 }
 
 func (rb *respBody) Render(w http.ResponseWriter, r *http.Request) error {
 	render.Status(r, rb.StatusCode)
-	rb.Timestamp = time.Now().Unix()
 	return nil
 }
 
