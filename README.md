@@ -36,6 +36,7 @@ Untuk menjalankan project ini cukup ketik perintah berikut di terminal:
 Perintah ini akan menjalankan 2 service di komputer teman-teman:
 
 - `ElasticSearch` => Database yang dioptimasi untuk melakukan pencarian dokumen berbasis teks (a.k.a Search Engine). Aplikasi ini akan dijalankan pada `http://localhost:9202`. Penjelasan mengenai index mapping yang digunakan bisa diakses di [es_mapping.md](docs/es_mapping.md).
+- `Kibana` => Web UI dari ElasticSearch. Aplikasi ini memudahkan kita untuk melakukan debugging data pada ElasticSearch jika diperlukan. Aplikasi ini dijalankan pada `http://localhost:5603`.
 - `Kuliner API` => API server untuk mencari, menambahkan, mengubah, dan menghapus data tentang kuliner Indonesia. Aplikasi ini akan dijalankan pada `http://localhost:8101`. Untuk sekarang aplikasi ini tidak memiliki web interface, sehingga untuk mengaksesnya gunakan Postman atau cURL sesuai dengan spesifikasi yang tertulis di [kuliner_api.md](docs/kuliner_api.md).
 
 > **Note:**

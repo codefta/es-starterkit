@@ -25,6 +25,22 @@ services:
     # mulai belajar tidak overwhelmed dengan log yang kurang relevan dari elasticsearch.
     logging:
       driver: none 
+  # kibana adalah web client dari elasticsearch. Aplikasi ini digunakan untuk memudahkan kita 
+  # melakukan berbagai operasi di elasticsearch. Ya bisa dibilang kalau di MySQL Kibana ini mirip 
+  # seperti MySQL Workbench, Navicat, SequelPro, dlsb-nya.
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.0
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    ports:
+      - 5603:5601
+    # disini kita menonaktifkan logging untuk kibana supaya pemula yang baru saja mulai 
+    # belajar tidak overwhelmed dengan log yang kurang relevan dari elasticsearch.
+    logging:
+      driver: none 
   # es_seeder digunakan untuk menginisialisasi index dan data yang ada di elasticsearch.
   # Berbeda dengan MySQL image yang sudah menyediakan path khusus untuk menaruh script
   # untuk inisialisasi, elasticsearch tidak memiliki fitur ini. Karena itulah kita perlu
