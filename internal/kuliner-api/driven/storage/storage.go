@@ -52,6 +52,21 @@ func (s *Storage) IndexFood(ctx context.Context, food core.Food) error {
 	return nil
 }
 
+func (s *Storage) UpdateFood(ctx context.Context, id string, food core.Food) error {
+	foodDoc := newFoodDoc(food)
+	resp, err := s.esClient.Update(s.esIndexName, id, strings.NewReader(foodDoc.String()))
+	if err != nil {
+		return fmt.Errorf("unable to index document due: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.IsError() {
+		data, _ := ioutil.ReadAll(resp.Body)
+		return fmt.Errorf("unable to update document due: %s", data)
+	}
+	return nil
+}
+
 func (s *Storage) DeleteFood(ctx context.Context, id string) error {
 	resp, err := s.esClient.Delete(
 		s.esIndexName,
