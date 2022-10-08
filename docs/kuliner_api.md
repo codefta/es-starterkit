@@ -18,6 +18,7 @@ POST: `/foods`
 
 Endpoint ini digunakan untuk mengindeks data kuliner ke dalam database.
 
+
 **Request Body:**
 
 - `name`, String => nama dari kuliner yang akan diindeks, jika nama kuliner sudah ada di database, maka data dari kuliner yang sudah ada tersebut akan ditimpa dengan data yang baru.
@@ -30,11 +31,10 @@ POST /foods
 Content-Type: application/json
 
 {
-    "name": "Bakso Istighfar",
-    "description": "Bakso sebesar bola voli yang banyak tersedia di daerah Bandung. Saking besarnya bakso ini, orang yang melihat sampai harus ber-istighfar, karena itulah bakso ini dinamakan sebagai bakso istighfar."
+"name": "Bakso Istighfar",
+"description": "Bakso sebesar bola voli yang banyak tersedia di daerah Bandung. Saking besarnya bakso ini, orang yang melihat sampai harus ber-istighfar, karena itulah bakso ini dinamakan sebagai bakso istighfar."
 }
 ```
-
 **Success Response:**
 
 ```json
@@ -148,6 +148,65 @@ Content-Type: application/json
 **Error Responses:**
 
 Tidak ada response error spesifik
+
+[Back to Top](#kuliner-api)
+
+---
+
+## Update Kuliner
+
+PUT: `/foods/{food_id}`
+
+Endpoint ini digunakan untuk mengubah data suatu kuliner dari database.
+
+**Request Body:**
+
+- `name`, String => nama dari kuliner yang akan diindeks, jika nama kuliner sudah ada di database, maka data dari kuliner yang sudah ada tersebut akan ditimpa dengan data yang baru.
+- `description`, String => deskripsi dari kuliner yang akan diindeks.
+
+**Example Request:**
+
+```json
+PUT /foods/bakso-istighfar
+
+Content-Type: application/json
+
+{
+  "name": "Bakso Istighfar",
+  "description": "Lorem ipsum dolor sit amet"
+}
+```
+
+**Success Response:**
+
+```json
+HTTP/1.1 200
+Content-Type: application/json
+
+{
+    "ok": true,
+    "data": {
+      "id": "bakso-istighfar",
+      "name": "Bakso istigfar",
+      "description": "Lorem ipsum dolor sit amet"
+    }
+}
+```
+
+**Error Responses:**
+
+- Not Found (`404`)
+
+    ```json
+    HTTP/1.1 404 Not Found
+    Content-Type: application/json
+
+    {
+        "ok": false,
+        "err": "ERR_NOT_FOUND",
+        "msg": "data is not found"
+    }
+    ```
 
 [Back to Top](#kuliner-api)
 
