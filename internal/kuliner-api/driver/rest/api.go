@@ -39,6 +39,7 @@ func (a *API) GetHandler() http.Handler {
 		r.Get("/", a.serveSearchFoods)
 		r.Post("/", a.serveIndexFood)
 		r.Delete("/{food_id}", a.serveDeleteFood)
+		r.Put("/{food_id}", a.serveUpdateFood)
 	})
 
 	return r
@@ -79,6 +80,34 @@ func (a *API) serveIndexFood(w http.ResponseWriter, r *http.Request) {
 		case core.ErrMissingDescription:
 			err = newBadRequestError("missing `description`")
 		}
+		render.Render(w, r, newErrorResp(err))
+		return
+	}
+	fr := newFoodResp(*food)
+	render.Render(w, r, newSuccessResp(fr))
+}
+
+func (a *API) serveUpdateFood(w http.ResponseWriter, r *http.Request) {
+	foodId := chi.URLParam(r, "food_id")
+	var rb updateFoodReqBody
+	err := render.Bind(r, &rb)
+	if err != nil {
+		render.Render(w, r, newErrorResp(newBadRequestError(err.Error())))
+		return
+	}
+
+	food, err := a.svc.UpdateFood(r.Context(), foodId, core.FoodInput{
+		Name:        rb.Name,
+		Description: rb.Description,
+	})
+	if err != nil {
+		switch err {
+		case core.ErrMissingName:
+			err = newBadRequestError("missing `name`")
+		case core.ErrMissingDescription:
+			err = newBadRequestError("missing `description")
+		}
+
 		render.Render(w, r, newErrorResp(err))
 		return
 	}

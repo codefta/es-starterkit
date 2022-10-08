@@ -64,7 +64,7 @@ func (s *service) UpdateFood(ctx context.Context, id string, input FoodInput) (*
 	if err != nil {
 		return nil, fmt.Errorf("unable to update food in storage due to: %w", err)
 	}
-	return &food, nil
+	return &Food{ID: id, Name: food.Name, Description: food.Description}, nil
 }
 
 func (s *service) DeleteFood(ctx context.Context, id string) error {

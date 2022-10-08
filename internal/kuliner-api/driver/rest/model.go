@@ -51,6 +51,15 @@ func (rb *indexFoodReqBody) Bind(r *http.Request) error {
 	return nil
 }
 
+type updateFoodReqBody struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+}
+
+func (rb *updateFoodReqBody) Bind(r *http.Request) error {
+	return nil
+}
+
 type foodResp struct {
 	ID          string `json:"id"`
 	Name        string `json:"name"`
