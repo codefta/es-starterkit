@@ -25,9 +25,16 @@ func (i FoodInput) Validate() error {
 	return nil
 }
 
-func (i FoodInput) ToFood() Food {
+func (i FoodInput) ToFood(id ...string) Food {
+	var idResult string
+	if len(id) != 0 {
+		idResult = id[0]
+	} else {
+		idResult = strings.ReplaceAll(strings.ToLower(strings.TrimSpace(i.Name)), " ", "-")
+	}
+
 	return Food{
-		ID:          strings.ReplaceAll(strings.ToLower(strings.TrimSpace(i.Name)), " ", "-"),
+		ID:          idResult,
 		Name:        i.Name,
 		Description: i.Description,
 	}

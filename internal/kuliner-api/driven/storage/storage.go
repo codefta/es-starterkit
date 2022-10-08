@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -9,13 +10,15 @@ import (
 	"strings"
 
 	"github.com/elastic/go-elasticsearch/v7"
+	"github.com/elastic/go-elasticsearch/v7/esapi"
 	"github.com/ghazlabs/es-starterkit/internal/kuliner-api/core"
 	"gopkg.in/validator.v2"
 )
 
 type Storage struct {
-	esClient    *elasticsearch.Client
-	esIndexName string
+	esClient        *elasticsearch.Client
+	esUpdateRequest *esapi.UpdateRequest
+	esIndexName     string
 }
 
 type Config struct {
@@ -54,11 +57,21 @@ func (s *Storage) IndexFood(ctx context.Context, food core.Food) error {
 
 func (s *Storage) UpdateFood(ctx context.Context, id string, food core.Food) error {
 	foodDoc := newFoodDoc(food)
-	resp, err := s.esClient.Update(s.esIndexName, id, strings.NewReader(foodDoc.String()))
+	req := esapi.UpdateRequest{
+		Index:      s.esIndexName,
+		DocumentID: id,
+		Body:       bytes.NewReader([]byte(fmt.Sprintf(`{"doc":%s}`, foodDoc.String()))),
+	}
+
+	resp, err := req.Do(ctx, s.esClient)
 	if err != nil {
-		return fmt.Errorf("unable to index document due: %w", err)
+		return fmt.Errorf("unable to update document due: %w", err)
 	}
 	defer resp.Body.Close()
+
+	if resp.StatusCode == http.StatusNotFound {
+		return core.ErrNotFound
+	}
 
 	if resp.IsError() {
 		data, _ := ioutil.ReadAll(resp.Body)

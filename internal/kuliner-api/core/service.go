@@ -56,10 +56,7 @@ func (s *service) UpdateFood(ctx context.Context, id string, input FoodInput) (*
 		return nil, err
 	}
 
-	food := Food{
-		Name:        input.Name,
-		Description: input.Description,
-	}
+	food := input.ToFood(id)
 	err = s.storage.UpdateFood(ctx, id, food)
 	if err != nil {
 		return nil, fmt.Errorf("unable to update food in storage due to: %w", err)
